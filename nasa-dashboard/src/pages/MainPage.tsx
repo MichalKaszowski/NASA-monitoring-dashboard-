@@ -3,11 +3,10 @@ import { useState, useEffect } from 'react';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import { Button } from '@mui/material';
-import AsteroidGrid from '../components/AsteroidGrid';
 import { DataGrid, type GridRowsProp, type GridColDef } from '@mui/x-data-grid';
 import { flattenObject } from '../utils/FlattenObject';
 import { dangerScore } from '../utils/DangerScore';
-
+import { BarChart } from '@mui/x-charts/BarChart';
 
 export interface Asteroid {
     name: string;
@@ -73,14 +72,22 @@ const columns: GridColDef[] = [
   { field: 'danger_score', headerName: 'Danger Score', width: 200 }
 ];
 
+const chartSetting = {
+  yAxis: [
+    {
+      label: 'rainfall (mm)',
+      width: 60,
+    },
+  ],
+  height: 300,
+};
+
 export default function MainPage() {
     const todayDate = new Date().toISOString().split('T')[0];
     const [beginDate, setBeginDate] = useState(todayDate);
     const [endDate, setEndDate] = useState(todayDate);
-
     const [asteroids, setAsteroids] = useState<Asteroid[]>([]);
     const [flattenedAsteroids, setFlattenedAsteroids] = useState<FlattenedAsteroid[]>([]);
-
     const [loading, setLoading] = useState(false);
 
     const apiKey = import.meta.env.VITE_API_KEY;
@@ -130,10 +137,20 @@ export default function MainPage() {
             {(asteroids.length == 0) ? (
                 <div>Brak danych do wyświetlenia.</div>
             ) : (
+                <>
                 <DataGrid columns={columns} rows={flattenedAsteroids} />
-                //   <AsteroidGrid asteroids={asteroids} />  
-                )
-            }
-        </div>
+                {/* //   <AsteroidGrid asteroids={asteroids} />   */}
+
+                <BarChart 
+                    dataset={flattenedAsteroids as Record<string, any>[]}
+                    xAxis={[{dataKey: 'name', label: 'Nazwa asteroidy', scaleType: 'band'}]}
+                    series={[{dataKey: 'distance_lunar', label: 'Danger Score'}]}
+                    {...chartSetting}
+                    />
+
+                </>
+
+            )}
+            </div>
     );
 }
