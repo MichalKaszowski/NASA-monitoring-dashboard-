@@ -1,5 +1,6 @@
 {
   "name": "nasa-dashboard",
+  "homepage": "https://MichalKaszowski.github.io/nasa-monitoring-dashboard",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,7 +8,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -19,6 +22,7 @@
     "@mui/x-date-pickers": "^8.27.2",
     "dayjs": "^1.11.20",
     "dotenv": "^17.3.1",
+    "gh-pages": "^6.3.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
