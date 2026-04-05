@@ -17,7 +17,7 @@ export function TopDiameterChart({ asteroids }: ChartProps) {
   const chartSetting = {
     yAxis: [
       {
-        label: "diameter [m]  ",
+        label: "Diameter [m]  ",
         width: 60,
       },
     ],

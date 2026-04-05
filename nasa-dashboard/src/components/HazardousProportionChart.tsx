@@ -13,13 +13,13 @@ export function HazardousProportionChart({ asteroids }: ChartProps) {
     {
       id: 0,
       value: hazardousCount,
-      label: "Zagrożenie",
+      label: "Hazardous",
       color: "#d32f2f",
     },
     {
       id: 1,
       value: safeCount,
-      label: "Bezpieczne",
+      label: "Non-Hazardous",
       color: "#4caf50", // Zielony
     },
   ];

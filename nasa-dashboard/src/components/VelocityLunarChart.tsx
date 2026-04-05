@@ -24,7 +24,7 @@ export function VelocityLunarChart({ asteroids }: ChartProps) {
   if (safeData.length > 0) {
     chartSeries.push({
       type: "scatter",
-      label: "Bezpieczne",
+      label: "Non-Hazardous",
       data: safeData,
       color: "green",
     });
@@ -33,7 +33,7 @@ export function VelocityLunarChart({ asteroids }: ChartProps) {
   if (hazardousData.length > 0) {
     chartSeries.push({
       type: "scatter",
-      label: "Zagrożenie",
+      label: "Hazardous",
       data: hazardousData,
       color: "red",
     });
